@@ -11,6 +11,12 @@ from gymnasium.utils.ezpickle import EzPickle
 from metaworld.envs import reward_utils
 from metaworld.envs.mujoco.mujoco_env import _assert_task_is_set
 
+DEFAULT_CAMERA_CONFIG = {
+    'azimuth': 45,
+    'distance': 1.8,
+    'elevation': -30,
+    'lookat': [0, 1, 0]
+}
 
 class SawyerMocapBase(mjenv_gym):
     """Provides some commonly-shared functions for Sawyer Mujoco envs that use mocap for XYZ control."""
@@ -33,6 +39,7 @@ class SawyerMocapBase(mjenv_gym):
             frame_skip=frame_skip,
             observation_space=self.sawyer_observation_space,
             render_mode=render_mode,
+            default_camera_config=DEFAULT_CAMERA_CONFIG
         )
         self.reset_mocap_welds()
         self.frame_skip = frame_skip
